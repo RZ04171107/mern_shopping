@@ -11,7 +11,7 @@ import {
 const Header = () => {
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='light' expand='lg' collapseOnSelect>
         <Container>
           <Navbar.Brand href='/'>Shopping App</Navbar.Brand>
           <Navbar.Toggle aria-controls='navbarScroll' />
@@ -25,10 +25,10 @@ const Header = () => {
                 <i className='fas fa-home'></i>Home
               </Nav.Link>
             </Nav>
-            <Nav.Link href='/cart'>
+            <Nav.Link href='/cart' className='link-dark'>
               <i className='fas fa-shopping-cart'></i> Cart
             </Nav.Link>
-            <Nav.Link href='/login'>
+            <Nav.Link href='/login' className='link-dark'>
               <i className='fas fa-user'></i> Sign In
             </Nav.Link>
             {/* <Form className='d-flex'>
