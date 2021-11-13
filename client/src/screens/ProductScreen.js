@@ -22,7 +22,7 @@ const ProductScreen = () => {
       setProduct(res.data);
     };
     fetchProduct();
-  }, []);
+  }, [id]);
 
   return (
     <div>
