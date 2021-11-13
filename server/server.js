@@ -1,25 +1,36 @@
 const express = require('express');
-//const mongoose = require('mongoose');
-//const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const app = express();
-
-// const items = require('../routes/items');
-
-// // Bodyparser Middleware
-// app.use(bodyParser.json());
-
-// // DB Config
-// const db = require('../config/keys').mongoURI;
-
-// // Connect to Mongo
-// mongoose
-//   .connect(db)
-//   .then(() => console.log('MongoDB connected!'))
-//   .catch((err) => console.log(err));
-
-// // use Routes
-// app.use('/api/items', items);
-
 const port = process.env.PORT || 8000;
+const connectDB = require('./config/db');
+const products = require('./data/products');
+//const productRoutes = require('./routes/product');
+const dotenv = require('dotenv');
+dotenv.config();
+connectDB();
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+// Bodyparser Middleware
+app.use(bodyParser.json());
+
+// use Routes
+// app.use('/api/items', items);
+// app.use('/api/products', productRoutes);
+
+app.get('/test', (req, res) => {
+  res.send('API is running...');
+});
+
+app.get('/api/products', (req, res) => {
+  res.send(products);
+});
+
+app.get('/api/products/:id', (req, res) => {
+  const { id } = req.params;
+  const product = products.find((p) => p._id === id);
+  res.send(product);
+});
+
+app.listen(port, () =>
+  console.log(`Server running in ${process.env.NODE_ENV} on port ${port}`)
+);
